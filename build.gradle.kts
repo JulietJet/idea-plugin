@@ -20,7 +20,7 @@ tasks.existing(Wrapper::class) {
 
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version ("0.3.7")
+    id("org.jetbrains.intellij") version ("0.4.8")
 }
 
 tasks.withType(type = JavaCompile::class) {
@@ -35,20 +35,25 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.4")
-
-    compile("org.freemarker:freemarker:2.3.28")
-
-    compile("commons-io:commons-io:2.6")
-    compile("com.squareup.retrofit2:retrofit:2.4.0")
-    compile("com.squareup.retrofit2:converter-jackson:2.4.0")
-    compile("com.squareup.okhttp3:logging-interceptor:3.12.1")
+    compile ("org.apache.clerezza.ext:org.json.simple:0.4")
 }
 
 configure<IntelliJPluginExtension> {
-    version = "2018.2.5"
+    version = "2019.1.2"
+}
+
+val fatJar = task("fatJar", type = Jar::class) {
+    from(configurations.compile.map({ if (it.isDirectory) it else zipTree(it) }))
+    with(tasks["jar"] as CopySpec)
 }
 
 tasks.withType(PatchPluginXmlTask::class) {
     changeNotes("Add change notes here.<br><em>most HTML tags may be used</em>")
+}
+
+
+tasks {
+    "buildPlugin" {
+        dependsOn(fatJar)
+    }
 }

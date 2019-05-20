@@ -1,26 +1,18 @@
 <idea-plugin>
-    <id>io.eroshenkoam.idea.idea</id>
-    <vendor email="eroshenkoam@qameta.io" url="http://eroshenkoam.io">Artem Eroshenko</vendor>
+    <id>io.ecisys.idea.idea</id>
+    <vendor email="info@qulix.com" url="https://www.qulix.com/">Qulix</vendor>
 
-    <description><![CDATA[This plugin allow to sync autotests with Jira]]></description>
+    <description><![CDATA[This plugin allow to sync autotests with TestRail]]></description>
 
     <extensions defaultExtensionNs="com.intellij"/>
 
     <actions>
-        <group id="eroshenkoam.idea" text="Jira Sync" description="Jira menu">
+        <group id="eroshenkoam.idea" text="TestRai Sync" description="TestRail menu">
             <add-to-group group-id="ProjectViewPopupMenuRefactoringGroup" anchor="last"/>
-            <action id="eroshenkoam.idea.jira.authenticate" class="io.eroshenkoam.idea.AuthenticationAction"
-                    text="Authenticate..." description="Authenticate..."/>
-            <action id="eroshenkoam.idea.jira.keys" class="io.eroshenkoam.idea.JiraKeyImportAction"
-                    text="Import Jira keys" description="Add tms link from jira"/>
-            <action id="eroshenkoam.idea.jira.lables" class="io.eroshenkoam.idea.JiraLabelsImportAction"
-                    text="Import Jira labels" description="Add tags from jira"/>
-            <action id="eroshenkoam.allure.migration" class="io.eroshenkoam.idea.AllureMigrationAction"
-                    text="Migrate Allure" description="Migrate Allure Annotations"/>
-            <action id="eroshenkoam.idea.testcase.export" class="io.eroshenkoam.idea.TestCaseExportAction"
-                    text="Export Test Cases" description="Add tags from jira"/>
-            <action id="eroshenkoam.idea.jira.export" class="io.eroshenkoam.idea.JiraTestCaseExportAction"
-                    text="Export Test Cases to Jira" description="Add tags from jira"/>
+            <action id="eroshenkoam.idea.actions" class="io.ecisys.idea.actions.TestRailExportIdAction"
+                    text="Export ID from TestRail" description="Export id from testRail"/>
+            <action id="exportIdToAnnotationRefField" class="io.ecisys.idea.actions.TestRailImportIdAction"
+                    text="Import ID to AnnotationRef" description="Import id to AnnotationRef"/>
         </group>
     </actions>
 
